@@ -1,26 +1,27 @@
 # Protein Structure Annotations
 
 ## About
+PDB structures for proteins with PDB annotations can be downloaded and parsed for amino acid numbering and residue names. SIFTS files, providing residue level mapping between PDB sequences and protein sequences, were downloaded for each PDB. Cysteines resolved in each PDB were mapped to their appropriate UniProt protein sequence and identifiers for PDB to UniProt pairs were created: PDB_C#_UniProtKBID_C#. 
 
 ## Set Up
-1. 
+1. Import modules
 ```
 pip3 install biopython xmlschema
 ```
 2. Prepare a text file with PDB identifiers <pdbs_to_download.txt>
 
 ## Usage
-1. 
-```
-python3 parse_sifts.py
-```
-2. 
+1. Download a list of PDBs
 ```
 python3 download_pdbs.py
 ```
-3. 
+2. Calculate the solvent accessibility of each residue in a list of PDBs according to the FreeSASA package 
 ```
 python3 calculate_sasa.py
+```
+3. Map PDB residues to UniProt protein sequences
+```
+python3 parse_sifts.py
 ```
 
 ## Citation
