@@ -6,7 +6,7 @@ PDB structures for proteins with PDB annotations can be downloaded and parsed fo
 ## Set Up
 1. Import modules
 ```
-pip3 install biopython xmlschema
+pip3 install biopython xmlschema freesasa
 ```
 2. Prepare a text file with PDB identifiers <pdbs_to_download.txt>
 
