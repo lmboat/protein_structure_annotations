@@ -47,7 +47,7 @@ cd pdb_protein_mapping
 ```
 2. Download and map SIFTS
 ```
-python3 parse_sifts.py
+python3 ../parse_sifts.py
 ```
 
 ## Citation
