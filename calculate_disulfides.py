@@ -156,10 +156,10 @@ def write_concat_output_file(output_filename, processed_sasa_files):
 
 def write_identifier_output_file(output_filename, cd):
     print('Writing outfile')
-    output_df = pd.read_csv("pdbs_to_sasa.csv")
+    output_df = pd.read_csv("pdbs_to_disulfides.csv")
     output_df = output_df.dropna()
 
-    output_df = output_df[(output_df['pdb_identifier'] != 'pdb_identifier')]
+    output_df = output_df[(output_df['disulfide_identifier'] != 'disulfide_identifier')]
 
     os.chdir(cd)
     output_df.to_csv(output_filename, index = False)
@@ -196,7 +196,7 @@ def main():
   output_dir = cd + '/' + args.ddir
   os.makedirs(output_dir, exist_ok = True)
   os.chdir(output_dir)
-  fs_files = [f for f in os.listdir('.') if f.endswith(".csv")]
+  ds_files = [f for f in os.listdir('.') if f.endswith(".csv")]
 
   # Read Input CSV with column of individual PDB ids ['6MHC', '39P0']
   print('processing ' + args.aa)
@@ -207,11 +207,17 @@ def main():
   process_files = []
   for i in range(len(pdb_files)):
     current = pdb_files[i].replace('.pdb', '_freesasa.csv')
-    if current not in fs_files:
+    if current not in ds_files:
       process_files.append(pdb_files[i])
 
   print("Total PDBs from input file that need to be processed: " + str(len(process_files)))
 
   get_pdb_details(process_files, output_dir, args.rid, args.aa, args.aid, cd)
+
+  os.chdir(output_dir)
+  if args.write_outfile == 'True':
+    downloaded_csv_files = [f for f in listdir(os.getcwd()) if isfile(join(os.getcwd(), f))]
+    write_concat_output_file("pdbs_to_disulfides.csv", downloaded_csv_files)
+    write_identifier_output_file(args.o, cd)
 
 main()
