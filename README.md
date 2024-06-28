@@ -11,15 +11,41 @@ pip3 install biopython xmlschema freesasa
 2. Prepare a text file with PDB identifiers <pdbs_to_download.txt>
 
 ## Usage
-1. Download a list of PDBs
+
+### Calculate the solvent accessibility of each residue in a list of PDBs according to the FreeSASA package
+1. Move into the solvent accessibility directory
 ```
-python3 download_pdbs.py
+cd solvent_accessibility_calculations
 ```
-2. Calculate the solvent accessibility of each residue in a list of PDBs according to the FreeSASA package 
+2. Download a list of PDBs
 ```
-python3 calculate_sasa.py
+python3 ../download_pdbs.py
 ```
-3. Map PDB residues to UniProt protein sequences
+3. Calculate the solvent accessibilities
+```
+python3 ../calculate_sasa.py
+```
+
+# Identify if each residue in a list of PDBs is involved in a disulfide bond
+1. Move into the disulfide directory
+```
+cd disulfide_bonds
+```
+2. Download a list of PDBs
+```
+python3 ../download_pdbs.py
+```
+3. Identify disulfide bonds
+```
+python3 ../calculate_disulfides.py
+```
+
+### Map PDB residues to UniProt protein sequences
+1. Move into the mapping directory
+```
+cd pdb_protein_mapping
+```
+2. Download and map SIFTS
 ```
 python3 parse_sifts.py
 ```
