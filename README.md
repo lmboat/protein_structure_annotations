@@ -26,7 +26,7 @@ python3 ../download_pdbs.py
 python3 ../calculate_sasa.py
 ```
 
-# Identify if each residue in a list of PDBs is involved in a disulfide bond
+### Identify if each residue in a list of PDBs is involved in a disulfide bond
 1. Move into the disulfide directory
 ```
 cd disulfide_bonds
