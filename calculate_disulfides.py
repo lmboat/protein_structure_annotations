@@ -1,5 +1,6 @@
 # Date Creadted: 230130
-# Date Modified: 230216
+# Date Modified: 240715
+# Technical Updates: Error handling no sulfur sg atoms case
 
 import sys, argparse, os, subprocess, glob, re, shutil
 from os.path import isfile, join, isdir
@@ -37,7 +38,7 @@ def get_pdb_details(pdb_files, ddir, resid, aa, atomid, cd):
     try:
       structures = parser.get_structure(pdb_files[i][:-4], pdb)
     except:
-      print("error in reading structure")
+      print("error in reading structure: " + pdb_files[i][:-4])
       continue
 
     sg_atoms = []
@@ -73,6 +74,10 @@ def get_pdb_details(pdb_files, ddir, resid, aa, atomid, cd):
                   aa_dict[new_pdb.replace('PDB', '').upper() + '_' + chainid + '_' + d[resname] + str(segid)] = selections[resid]
               except:
                   continue
+
+    if (len(sg_atoms) == 0):
+      print("no sulfur sg atoms in structure: " + pdb_files[i][:-4])
+      continue
 
     # Find SG atoms within 3 angstroms of each other
     ns = NeighborSearch(sg_atoms)
@@ -206,7 +211,7 @@ def main():
   # Check which PDB files need to be processed
   process_files = []
   for i in range(len(pdb_files)):
-    current = pdb_files[i].replace('.pdb', '_freesasa.csv')
+    current = pdb_files[i].replace('.pdb', '_disulfide.csv')
     if current not in ds_files:
       process_files.append(pdb_files[i])
 
