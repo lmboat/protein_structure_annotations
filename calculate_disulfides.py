@@ -116,6 +116,7 @@ def get_pdb_details(pdb_files, ddir, resid, aa, atomid, cd):
 
     os.chdir(ddir)
     disulfide_df.to_csv(pdb.replace('.pdb', '') + '_disulfide.csv', index = False)
+    os.chdir(cd)
 
 def list_to_string(lst, symbol):
   return (symbol.join([str(elem) for elem in lst]))
